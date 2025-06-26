@@ -2,6 +2,7 @@
 
 use App\Livewire\Admin\Categories\Index;
 use App\Livewire\Admin\Categories\Form;
+use App\Livewire\Admin\Posts\Index as PostIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,4 +21,5 @@ Route::middleware([
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/categories', Index::class)->name('admin.categories');
+    Route::get('/admin/posts', PostIndex::class)->name('admin.posts');
 });
