@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Admin\Categories\Index;
+use App\Livewire\Admin\Categories\Form;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +16,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/categories', Index::class)->name('admin.categories');
 });
