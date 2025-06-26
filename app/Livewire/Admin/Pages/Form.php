@@ -60,6 +60,10 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.admin.pages.form');
+        return view('livewire.admin.pages.form')
+            ->layout('components.layouts.admin', [
+                'title' => $this->pageId ? 'Edit Page' : 'Create Page',
+            ]);
     }
+
 }

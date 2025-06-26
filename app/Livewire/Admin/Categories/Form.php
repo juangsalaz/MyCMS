@@ -51,6 +51,10 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.admin.categories.form');
+        return view('livewire.admin.categories.form')
+            ->layout('components.layouts.admin', [
+                'title' => $this->categoryId ? 'Edit Category' : 'Create Category',
+            ]);
     }
+
 }

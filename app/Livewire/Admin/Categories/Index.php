@@ -31,7 +31,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.categories.index', [
-            'categories' => Category::latest()->get(),
-        ]);
+                'categories' => Category::latest()->get(),
+            ])->layout('components.layouts.admin', [
+                'title' => 'Categories',
+            ]);
     }
 }

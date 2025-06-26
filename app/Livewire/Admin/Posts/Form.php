@@ -82,7 +82,9 @@ class Form extends Component
     public function render()
     {
         return view('livewire.admin.posts.form', [
-            'categories' => Category::all(),
-        ]);
+                'categories' => Category::orderBy('name')->get(),
+            ])->layout('components.layouts.admin', [
+                'title' => $this->postId ? 'Edit Post' : 'Create Post',
+            ]);
     }
 }

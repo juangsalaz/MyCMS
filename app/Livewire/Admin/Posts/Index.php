@@ -10,7 +10,7 @@ class Index extends Component
 {
 
     public $selectedPost = null;
-    
+
     #[On('post-saved')]
     public function refresh()
     {
@@ -35,7 +35,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.posts.index', [
-            'posts' => Post::with('categories')->latest()->get(),
-        ]);
+                'posts' => Post::with('categories')->latest()->get(),
+            ])->layout('components.layouts.admin', [
+                'title' => 'Posts',
+            ]);
     }
 }

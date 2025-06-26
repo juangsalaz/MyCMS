@@ -4,6 +4,7 @@ use App\Livewire\Admin\Categories\Index;
 use App\Livewire\Admin\Categories\Form;
 use App\Livewire\Admin\Posts\Index as PostIndex;
 use App\Livewire\Admin\Pages\Index as PageIndex;
+use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ Route::middleware([
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('/admin/categories', Index::class)->name('admin.categories');
     Route::get('/admin/posts', PostIndex::class)->name('admin.posts');
     Route::get('/admin/pages', PageIndex::class)->name('admin.pages');

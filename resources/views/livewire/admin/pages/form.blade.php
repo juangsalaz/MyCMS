@@ -13,7 +13,6 @@
         <div class="mb-4">
             <label class="block mb-1">Body</label>
             <div class="mb-4" wire:ignore>
-                <label class="block mb-1">Body</label>
                 <input id="trix-body" type="hidden" name="body" value="{{ $body }}">
                 <trix-editor input="trix-body"></trix-editor>
             </div>

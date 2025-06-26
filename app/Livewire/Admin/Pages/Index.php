@@ -24,7 +24,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.admin.pages.index', [
-            'pages' => Page::latest()->get(),
-        ]);
+                'pages' => Page::latest()->get(),
+            ])->layout('components.layouts.admin', [
+                'title' => 'Pages',
+            ]);
     }
 }
