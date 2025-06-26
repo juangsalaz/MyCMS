@@ -54,15 +54,14 @@
 
 <script>
     document.addEventListener('livewire:init', () => {
-        Livewire.on('set-trix-content', ({ content }) => {
-            const input = document.getElementById('trix-content');
+        Livewire.on('set-trix-body', ({ body }) => {
+            const input = document.getElementById('trix-body');
             const editor = document.querySelector('trix-editor');
 
             if (input && editor) {
-                input.value = content;
-
-                // Force update Trix editor manually
-                editor.editor.loadHTML(content);
+                input.value = body;
+                // 🚨 This is the key line to force Trix to render HTML (including <img>)
+                editor.editor.loadHTML(body);
             }
         });
     });
