@@ -10,10 +10,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Form extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, AuthorizesRequests;
 
     public $postId;
     public $title = '';
@@ -24,6 +25,11 @@ class Form extends Component
     public $published_at;
     public $image;
     public $selectedCategories = [];
+
+    public function mount()
+    {
+        $this->authorize('manage posts');
+    }
 
     #[Validate('image|max:1024')]
     public $uploadedImage;

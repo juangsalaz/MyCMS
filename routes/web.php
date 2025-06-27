@@ -25,10 +25,10 @@ Route::middleware([
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
-    Route::get('/admin/categories', Index::class)->name('admin.categories');
-    Route::get('/admin/posts', PostIndex::class)->name('admin.posts');
-    Route::get('/admin/pages', PageIndex::class)->name('admin.pages');
+    Route::middleware(['auth', 'permission:access dashboard'])->get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::middleware(['auth', 'permission:manage categories'])->get('/admin/categories', Index::class)->name('admin.categories');
+    Route::middleware(['auth', 'permission:manage posts'])->get('/admin/posts', PostIndex::class)->name('admin.posts');
+    Route::middleware(['auth', 'permission:manage pages'])->get('/admin/pages', PageIndex::class)->name('admin.pages');
     Route::post('/admin/trix-upload', function (Request $request) {
         $request->validate([
             'attachment' => 'required|image|max:2048',
@@ -41,6 +41,6 @@ Route::middleware(['auth'])->group(function () {
         ]);
     })->name('admin.trix-upload');
 
-    Route::get('/admin/media', MediaManager::class)->name('admin.media');
+    Route::middleware(['auth', 'permission:manage media'])->get('/admin/media', MediaManager::class)->name('admin.media');
 
 });

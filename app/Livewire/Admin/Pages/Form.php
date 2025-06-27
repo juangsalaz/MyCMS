@@ -6,14 +6,22 @@ use Livewire\Component;
 use App\Models\Page;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Form extends Component
 {
+    use AuthorizesRequests;
+
     public $pageId;
     public $title = '';
     public $slug = '';
     public $body = '';
     public $status = 'draft';
+
+    public function mount()
+    {
+        $this->authorize('manage pages');
+    }
 
     public function updatedTitle($value)
     {

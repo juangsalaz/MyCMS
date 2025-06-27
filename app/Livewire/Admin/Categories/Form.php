@@ -6,12 +6,20 @@ use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Form extends Component
 {
+    use AuthorizesRequests;
+
     public string $name = '';
     public string $slug = '';
     public $categoryId;
+
+    public function mount()
+    {
+        $this->authorize('manage pages');
+    }
 
     protected function rules()
     {
