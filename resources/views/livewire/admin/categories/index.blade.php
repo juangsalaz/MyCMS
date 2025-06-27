@@ -1,4 +1,4 @@
-<div>
+<div class="mt-4 border p-4 rounded bg-white shadow">
     <livewire:admin.categories.form />
 
     <table class="table-auto w-full mt-6 border">

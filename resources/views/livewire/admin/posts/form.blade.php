@@ -1,4 +1,4 @@
-<div>
+<div class="mt-4 border p-4 rounded bg-white shadow">
     <form wire:submit.prevent="save">
         <div class="mb-4">
             <label>Title</label>
