@@ -40,6 +40,11 @@
                     Pages
                 </a>
 
+                <a href="{{ route('admin.media') }}"
+                    wire:navigate
+                    class="block px-2 py-1 rounded {{ request()->routeIs('admin.media') ? 'bg-blue-100 text-blue-700 font-semibold' : 'hover:bg-gray-200' }}">
+                    Media Manager
+                </a>
             </nav>
         </aside>
 

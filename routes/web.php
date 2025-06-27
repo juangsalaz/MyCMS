@@ -5,6 +5,8 @@ use App\Livewire\Admin\Categories\Form;
 use App\Livewire\Admin\Posts\Index as PostIndex;
 use App\Livewire\Admin\Pages\Index as PageIndex;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Admin\MediaManager;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -38,5 +40,7 @@ Route::middleware(['auth'])->group(function () {
             'url' => Storage::url($path),
         ]);
     })->name('admin.trix-upload');
+
+    Route::get('/admin/media', MediaManager::class)->name('admin.media');
 
 });
