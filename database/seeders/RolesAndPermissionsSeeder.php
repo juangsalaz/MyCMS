@@ -16,6 +16,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'manage categories']);
         Permission::create(['name' => 'manage media']);
         Permission::create(['name' => 'access dashboard']);
+        Permission::create(['name' => 'manage users']);
 
         $admin = Role::create(['name' => 'admin']);
         $admin->givePermissionTo(Permission::all());
