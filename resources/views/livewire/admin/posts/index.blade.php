@@ -60,6 +60,21 @@
                 <img src="{{ asset('storage/' . $selectedPost->image) }}" class="mt-4 h-40 rounded">
             @endif
 
+            @php
+                $blocks = json_decode($selectedPost?->block_content ?? '[]', true);
+                if (!is_array($blocks)) {
+                    $blocks = [];
+                }
+            @endphp
+
+            @foreach ($blocks as $block)
+                @if ($block['type'] === 'text')
+                    <div class="mb-4">{!! nl2br(e($block['data']['content'])) !!}</div>
+                @elseif ($block['type'] === 'image')
+                    <img src="{{ $block['data']['url'] }}" class="mb-4">
+                @endif
+            @endforeach
+
             <button
                 x-on:click="$dispatch('close-post-detail')"
                 class="absolute top-2 right-2 text-gray-600 hover:text-red-500"

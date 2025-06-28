@@ -11,7 +11,7 @@ class Post extends Model
 
     protected $fillable = [
         'title', 'slug', 'excerpt', 'content', 
-        'image', 'status', 'published_at', 'user_id',
+        'image', 'status', 'published_at', 'user_id', 'block_content'
     ];
 
     protected $casts = [
@@ -26,5 +26,10 @@ class Post extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function blocks()
+    {
+        return $this->hasMany(ContentBlock::class)->orderBy('position');
     }
 }

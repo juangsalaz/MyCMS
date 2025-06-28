@@ -25,14 +25,21 @@ class Form extends Component
     public $published_at;
     public $image;
     public $selectedCategories = [];
+    public $blocks = [];
+
+    #[Validate('image|max:1024')]
+    public $uploadedImage;
 
     public function mount()
     {
         $this->authorize('manage posts');
     }
 
-    #[Validate('image|max:1024')]
-    public $uploadedImage;
+    #[On('blocksUpdated')]
+    public function updateBlocks($blocks)
+    {
+        $this->blocks = $blocks;
+    }
 
     public function updatedTitle($value)
     {
@@ -58,7 +65,8 @@ class Form extends Component
                 'status' => $this->status,
                 'published_at' => $this->status === 'published' ? now() : null,
                 'user_id' => Auth::id(),
-                'image' => $this->uploadedImage ? $this->uploadedImage->store('posts', 'public') : $post->image ?? null,
+                'image' => $this->uploadedImage ? $this->uploadedImage->store('posts', 'public') : null,
+                'block_content' => json_encode($this->blocks),
             ]
         );
 
@@ -80,6 +88,7 @@ class Form extends Component
         $this->content = $post->content;
         $this->status = $post->status;
         $this->published_at = $post->published_at;
+        $this->blocks = json_decode($post->block_content, true) ?? [];
         $this->selectedCategories = $post->categories->pluck('id')->toArray();
 
         $this->dispatch('set-trix-content', content: $post->content);
@@ -88,9 +97,9 @@ class Form extends Component
     public function render()
     {
         return view('livewire.admin.posts.form', [
-                'categories' => Category::orderBy('name')->get(),
-            ])->layout('components.layouts.admin', [
-                'title' => $this->postId ? 'Edit Post' : 'Create Post',
-            ]);
+            'categories' => Category::orderBy('name')->get(),
+        ])->layout('components.layouts.admin', [
+            'title' => $this->postId ? 'Edit Post' : 'Create Post',
+        ]);
     }
 }

@@ -46,6 +46,10 @@
             @endif
         </div>
 
+        <livewire:admin.posts.blocks />
+
+        <pre>Parent data: {{ json_encode($blocks) }}</pre>
+
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
             Save Post
         </button>
@@ -60,7 +64,6 @@
 
             if (input && editor) {
                 input.value = body;
-                // 🚨 This is the key line to force Trix to render HTML (including <img>)
                 editor.editor.loadHTML(body);
             }
         });
