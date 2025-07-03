@@ -9,6 +9,14 @@ This is a **MyCMS CMS** project powered by:
 
 ---
 
+## Live Demo
+http://157.245.201.122:8001/login
+
+| Role  | Email              | Password |
+|-------|--------------------|----------|
+| Admin | admin@gmail.com  | password |
+| Editor| editor@gmail.com | password |
+
 ## 🛠 Installation
 
 ### 📥 Clone the repository
