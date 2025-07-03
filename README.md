@@ -1,6 +1,6 @@
 # 🚀 MyCMS CMS
 
-This is a **Laravel CMS** project powered by:
+This is a **MyCMS CMS** project powered by:
 - **Laravel 12**
 - **Livewire 3** for reactive components
 - **Laravel Sail** for local Docker environment
