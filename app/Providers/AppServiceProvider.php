@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        app()->resolving(function () {
+            if (session()->has('locale')) {
+                app()->setLocale(session('locale'));
+            }
+        });
     }
 }

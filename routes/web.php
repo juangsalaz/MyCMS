@@ -44,4 +44,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['auth', 'permission:manage media'])->get('/admin/media', MediaManager::class)->name('admin.media');
     Route::middleware(['auth', 'permission:manage users'])->get('/admin/users', UsersIndex::class)->name('admin.users');
+
+    Route::get('/lang/{locale}', function ($locale) {
+        if (!in_array($locale, ['en', 'id'])) {
+            abort(400);
+        }
+        session()->put('locale', $locale);
+        return redirect()->back();
+    });
+
 });
