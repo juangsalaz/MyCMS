@@ -77,7 +77,7 @@ DB_USERNAME=sail
 DB_PASSWORD=password
 ```
 
-### 🔥 Running
+## 🔥 Running
 Start everything:
 ```bash
 sail up -d
@@ -88,7 +88,7 @@ Then visit:
 http://localhost
 ```
 
-### 👤 Admin Access
+## 👤 Admin Access
 
 By default, the database seeder will create these users:
 
@@ -97,7 +97,7 @@ By default, the database seeder will create these users:
 | Admin | admin@gmail.com  | password |
 | Editor| editor@gmail.com | password |
 
-### ✨ Features
+## ✨ Features
 
 - [x] Role-based access control with **Spatie Laravel Permission**
 - [x] Manage **Posts**, **Pages**, **Categories**, and **Media**
