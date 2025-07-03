@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::middleware([
@@ -23,9 +23,10 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect()->route('admin.dashboard');
     })->name('dashboard');
 });
+
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['auth', 'permission:access dashboard'])->get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
