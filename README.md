@@ -101,9 +101,8 @@ By default, the database seeder will create these users:
 
 - [x] Role-based access control with **Spatie Laravel Permission**
 - [x] Manage **Posts**, **Pages**, **Categories**, and **Media**
-- [x] JSON API for frontend use (Next.js, Nuxt, React, etc)
+- [x] JSON API for frontend use (Next.js, Nuxt, React, etc), this is the api documentation link (https://documenter.getpostman.com/view/3460037/2sB34bL4BH)
 - [x] UI multi-language ready (`resources/lang`)
-- [x] Reusable content blocks (Text, Image, Quote, etc)
 - [x] Built with **TALL stack** (Tailwind, Alpine, Livewire, Laravel)
 
 
