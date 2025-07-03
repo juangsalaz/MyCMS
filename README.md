@@ -1,4 +1,4 @@
-# 🚀 Laravel Livewire CMS
+# 🚀 MyCMS CMS
 
 This is a **Laravel CMS** project powered by:
 - **Laravel 12**
