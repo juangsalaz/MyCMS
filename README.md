@@ -88,7 +88,7 @@ Then visit:
 http://localhost
 ```
 
-## 👤 Admin Access
+## 👤 Users Access
 
 By default, the database seeder will create these users:
 
