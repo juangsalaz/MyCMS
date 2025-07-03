@@ -6,8 +6,6 @@ use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Validate;
 
 class Form extends Component
 {
@@ -17,15 +15,16 @@ class Form extends Component
     public $password = '';
     public $role = '';
 
-    #[On('edit-user')]
-    public function edit($id)
+    public function mount($id = null)
     {
-        $user = User::findOrFail($id);
+        if ($id) {
+            $user = User::findOrFail($id);
 
-        $this->userId = $user->id;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->role = $user->roles->pluck('name')->first() ?? '';
+            $this->userId = $user->id;
+            $this->name = $user->name;
+            $this->email = $user->email;
+            $this->role = $user->roles->pluck('name')->first() ?? '';
+        }
     }
 
     public function save()
@@ -33,7 +32,7 @@ class Form extends Component
         $this->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->userId,
-            'password' => 'nullable',
+            'password' => 'nullable|min:6',
             'role' => 'required',
         ]);
 
@@ -48,14 +47,18 @@ class Form extends Component
 
         $user->syncRoles([$this->role]);
 
-        $this->dispatch('user-saved');
-        $this->reset(['userId', 'name', 'email', 'password', 'role']);
+        session()->flash('success', 'User saved successfully.');
+
+        return redirect()->route('admin.users');
     }
 
     public function render()
     {
         return view('livewire.admin.users.form', [
             'roles' => Role::pluck('name'),
+        ])->layout('components.layouts.admin', [
+            'title' => $this->userId ? 'Edit User' : 'Create User',
         ]);
     }
+
 }

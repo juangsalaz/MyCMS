@@ -1,7 +1,19 @@
 <div class="mt-4 border p-4 rounded bg-white shadow">
-    <livewire:admin.users.form />
 
-    <table class="table-auto w-full mt-6 border">
+    @if (session('success'))
+        <div class="p-3 mb-4 bg-green-100 text-green-800 rounded shadow">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="flex justify-end mb-4">
+        <a href="{{ route('admin.users.create') }}"
+           class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            + Add User
+        </a>
+    </div>
+
+    <table class="table-auto w-full border">
         <thead>
             <tr class="bg-gray-100">
                 <th class="p-2 border">#</th>
@@ -19,8 +31,10 @@
                     <td class="p-2 border">{{ $user->email }}</td>
                     <td class="p-2 border">{{ $user->roles->pluck('name')->join(', ') }}</td>
                     <td class="p-2 border">
-                        <button wire:click="edit({{ $user->id }})" class="text-blue-600">Edit</button>
-                        <button wire:click="delete({{ $user->id }})" class="text-red-600 ml-2">Delete</button>
+                        <a href="{{ route('admin.users.edit', $user->id) }}"
+                           class="text-blue-600 hover:underline">Edit</a>
+                        <button wire:click="delete({{ $user->id }})"
+                                class="text-red-600 ml-2">Delete</button>
                     </td>
                 </tr>
             @endforeach

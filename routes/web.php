@@ -7,6 +7,8 @@ use App\Livewire\Admin\Pages\Index as PageIndex;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\MediaManager;
 use App\Livewire\Admin\Users\Index as UsersIndex;
+use App\Livewire\Admin\Users\Form as UserForm;
+
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -43,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('admin.trix-upload');
 
     Route::middleware(['auth', 'permission:manage media'])->get('/admin/media', MediaManager::class)->name('admin.media');
-    Route::middleware(['auth', 'permission:manage users'])->get('/admin/users', UsersIndex::class)->name('admin.users');
+    //Route::middleware(['auth', 'permission:manage users'])->get('/admin/users', UsersIndex::class)->name('admin.users');
 
     Route::get('/lang/{locale}', function ($locale) {
         if (!in_array($locale, ['en', 'id'])) {
@@ -51,6 +53,12 @@ Route::middleware(['auth'])->group(function () {
         }
         session()->put('locale', $locale);
         return redirect()->back();
+    });
+
+    Route::middleware(['auth', 'permission:manage users'])->group(function () {
+        Route::get('/admin/users', UsersIndex::class)->name('admin.users');
+        Route::get('/admin/users/create', UserForm::class)->name('admin.users.create');
+        Route::get('/admin/users/{id}/edit', UserForm::class)->name('admin.users.edit');
     });
 
 });
