@@ -1,5 +1,15 @@
 <div class="mt-4 border p-4 rounded bg-white shadow">
-    <livewire:admin.categories.form />
+    @if (session('success'))
+        <div class="p-3 mb-4 bg-green-100 text-green-800 rounded shadow">
+            {{ session('success') }}
+        </div>
+    @endif
+    <div class="flex justify-end mb-4">
+        <a href="{{ route('admin.categories.create') }}"
+        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+            + {{ __('category.create') }}
+        </a>
+    </div>
 
     <table class="table-auto w-full mt-6 border">
         <thead>
@@ -17,7 +27,8 @@
                 <td class="p-2 border">{{ $category->name }}</td>
                 <td class="p-2 border">{{ $category->slug }}</td>
                 <td class="p-2 border">
-                    <button wire:click="edit({{ $category->id }})" class="text-blue-600">Edit</button>
+                    <a href="{{ route('admin.categories.edit', $category->id) }}"
+                        class="text-blue-600 hover:underline">Edit</a>
                     <button wire:click="delete({{ $category->id }})" class="text-red-600 ml-2">Delete</button>
                 </td>
             </tr>

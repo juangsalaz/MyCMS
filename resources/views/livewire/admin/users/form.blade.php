@@ -5,7 +5,7 @@
 
     <form wire:submit.prevent="save" class="space-y-4">
         <div>
-            <label>Name</label>
+            <label>{{ __('user.name') }}</label>
             <input type="text" wire:model.live="name" class="form-control w-full">
             @error('name') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
         </div>
@@ -17,7 +17,7 @@
         </div>
 
         <div>
-            <label>Password</label>
+            <label>{{ __('user.password') }}</label>
             <input type="password" wire:model.live="password" class="form-control w-full">
             @if($userId)
                 <p class="text-xs text-gray-500">Leave blank to keep current password</p>
@@ -37,7 +37,7 @@
         </div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
-            {{ $userId ? 'Update' : 'Create' }} User
+            {{ $userId ? __('buttons.update') : __('buttons.create') }}
         </button>
     </form>
 </div>

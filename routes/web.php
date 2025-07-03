@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\Admin\Categories\Index;
-use App\Livewire\Admin\Categories\Form;
+use App\Livewire\Admin\Categories\Index as CategoriesIndex;
+use App\Livewire\Admin\Categories\Form as CategoryForm;
 use App\Livewire\Admin\Posts\Index as PostIndex;
 use App\Livewire\Admin\Pages\Index as PageIndex;
 use App\Livewire\Admin\Dashboard;
@@ -29,7 +29,7 @@ Route::middleware([
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['auth', 'permission:access dashboard'])->get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
-    Route::middleware(['auth', 'permission:manage categories'])->get('/admin/categories', Index::class)->name('admin.categories');
+    //Route::middleware(['auth', 'permission:manage categories'])->get('/admin/categories', Index::class)->name('admin.categories');
     Route::middleware(['auth', 'permission:manage posts'])->get('/admin/posts', PostIndex::class)->name('admin.posts');
     Route::middleware(['auth', 'permission:manage pages'])->get('/admin/pages', PageIndex::class)->name('admin.pages');
     Route::post('/admin/trix-upload', function (Request $request) {
@@ -60,5 +60,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/users/create', UserForm::class)->name('admin.users.create');
         Route::get('/admin/users/{id}/edit', UserForm::class)->name('admin.users.edit');
     });
+
+    Route::middleware(['auth', 'permission:manage pages'])->group(function () {
+        Route::get('/admin/categories', CategoriesIndex::class)->name('admin.categories');
+        Route::get('/admin/categories/create', CategoryForm::class)->name('admin.categories.create');
+        Route::get('/admin/categories/{id}/edit', CategoryForm::class)->name('admin.categories.edit');
+    });
+
 
 });

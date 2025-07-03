@@ -5,7 +5,6 @@ namespace App\Livewire\Admin\Categories;
 use Livewire\Component;
 use App\Models\Category;
 use Illuminate\Support\Str;
-use Livewire\Attributes\On;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Form extends Component
@@ -14,11 +13,18 @@ class Form extends Component
 
     public string $name = '';
     public string $slug = '';
-    public $categoryId;
+    public ?int $categoryId = null;
 
-    public function mount()
+    public function mount($id = null)
     {
         $this->authorize('manage pages');
+
+        if ($id) {
+            $category = Category::findOrFail($id);
+            $this->categoryId = $category->id;
+            $this->name = $category->name;
+            $this->slug = $category->slug;
+        }
     }
 
     protected function rules()
@@ -42,19 +48,9 @@ class Form extends Component
             ['name' => $this->name, 'slug' => $this->slug]
         );
 
-        $this->reset(['name', 'slug', 'categoryId']);
+        session()->flash('success', 'Category saved successfully.');
 
-        // Emit event using Livewire 3 style
-        $this->dispatch('category-saved');
-    }
-
-    #[On('edit-category')]
-    public function editCategory($id)
-    {
-        $category = Category::findOrFail($id);
-        $this->categoryId = $category->id;
-        $this->name = $category->name;
-        $this->slug = $category->slug;
+        return redirect()->route('admin.categories');
     }
 
     public function render()
@@ -64,5 +60,4 @@ class Form extends Component
                 'title' => $this->categoryId ? 'Edit Category' : 'Create Category',
             ]);
     }
-
 }
